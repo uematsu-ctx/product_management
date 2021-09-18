@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.workType {
+	appearance: none;
+	cursor: not-allowed;
+	padding-left: 20px;
+}
+
+.workType:checked::after {
+	font-size: 20px;
+	position: absolute;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	content: '✓';
+	top: -5px;
+	left: 0px;
+	text-align: center;
+}
+
+.form-group>div {
+	position: relative;
+}
+
+#sidebar {
+	min-height: 100vh;
+}
+
+.loginParts {
+	width: 250px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.loginform {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

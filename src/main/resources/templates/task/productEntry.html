@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Product Entry</title>
+</head>
+<body>
+
+	<div th:fragment="productEntry_contents">
+		<div style="display: flex; justify-content: center">
+			<div class="col-sm-5 " >
+				<div class="page-header text-center">
+
+					<h1>入庫画面</h1>
+				</div>
+				<form method="post" th:action="@{/productEntry}"
+					th:object="${entryForm}">
+					<table class="table table-bordered table-hover">
+						<!-- 商品名の入力エリア(固定)-->
+						<tr>
+							<th>商品名</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control"
+										th:field="*{productName}" readonly><input
+										type="hidden" th:field="*{id}">
+								</div></td>
+						</tr>
+						<!-- 現在数量の入力エリア(固定) -->
+						<tr>
+							<th>現在数量</th>
+							<td>
+								<div class="form-group">
+									<input type="text" class="form-control" th:field="*{count}"
+										readonly>
+								</div>
+							</td>
+						</tr>
+						<!-- 数量の入力エリア -->
+						<tr>
+							<th>入庫数量</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control" th:field="*{countPrus}">
+									<!-- 個別エラーメッセージの表示 -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('countPrus')}"
+										th:errors="*{countPrus}">price_error</span>
+								</div></td>
+						</tr>
+
+						<!-- 担当者の入力エリア -->
+						<tr>
+							<th>担当者</th>
+							<td><select id="singleSelect" th:field="*{personId}"><option
+										th:each="item:${selectItems0}" th:value="${item.id}"
+										th:text="${item.user_name}">singleSelect</option></select></td>
+						</tr>
+					</table>
+					<!-- 商品の入庫登録ボタン -->
+					<div class="d-md-flex justify-content-between">
+						<button class="btn btn-primary" type="submit">入庫する</button>
+
+						<button class="btn btn-secondary" type="button"
+							onclick="history.back()">戻る</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	function Add() {
+		document.fm.C.value = eval(document.fm.A.value) + (document.fm.B.value);
+	}
+</script>
+</html>

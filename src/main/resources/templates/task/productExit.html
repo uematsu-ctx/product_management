@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Product Exit</title>
+</head>
+<body>
+	<div th:fragment="productExit_contents">
+		<div style="display: flex; justify-content: center">
+			<div class="col-sm-5">
+				<div class="page-header text-center">
+					<h1>出庫画面</h1>
+				</div>
+				<form method="post" th:action="@{/productExit}"
+					th:object="${exitForm}">
+					<table class="table table-bordered table-hover">
+						<!-- 商品名のエリア -->
+						<tr>
+							<th>商品名</th>
+							<td><input type="text" class="form-control"
+								th:field="*{productName}" readonly><input type="hidden"
+								th:field="*{id}"></td>
+						</tr>
+						<!-- 現在数量のエリア -->
+						<tr>
+							<th>現在数量</th>
+							<td>
+								<div class="form-group">
+									<input type="text" class="form-control" th:field="*{count}"
+										readonly>
+								</div>
+							</td>
+						</tr>
+						<!-- 数量の入力エリア -->
+						<tr>
+							<th>出庫数量</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control"
+										th:field="*{countMinus}">
+									<!-- 個別エラーメッセージの表示 -->
+									<span class="text-danger"
+										th:if="${#fields.hasErrors('countMinus')}"
+										th:errors="*{countMinus}">price_error</span>
+								</div></td>
+						</tr>
+						<!-- 担当者のエリア -->
+						<tr>
+							<th>担当者</th>
+							<td><select id="singleSelect" th:field="*{personId}"><option
+										th:each="item:${selectItems0}" th:value="${item.id}"
+										th:text="${item.user_name}">singleSelect</option></select></td>
+						</tr>
+					</table>
+					<!-- 出庫登録ボタンのエリア -->
+					<div class="d-md-flex justify-content-between">
+						<button class="btn btn-primary" type="submit">出庫する</button>
+
+						<button class="btn btn-secondary" type="button"
+							onclick="history.back()">戻る</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

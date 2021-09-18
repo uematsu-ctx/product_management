@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Product List</title>
+</head>
+<body>
+	<div th:fragment="productList_contents">
+		<div class="col-sm-12">
+			<h1>商品一覧</h1>
+			<div class="float-end" th:text="'ようこそ'+${lu}+'さん'"></div>
+		</div>
+		<!-- 入庫出庫の結果表示 -->
+		<label class="text-info" th:text="${result}">結果表示</label><br />
+		<!-- CSV出力用のリンク -->
+		<a class="btn btn-primary" th:href="@{'/productList/csv'}">CSV出力</a>
+		<!-- 検索キーワード入力 -->
+		<div style="position: relative; width: 100%; height: 50px;">
+			<div
+				style="display: flex; width: 350px; position: absolute; right: 0;">
+				<input type="text" class="form-control enter" id="message"
+					placeholder="検索キーワードを入力" style="margin-right: 15px;">
+				<button class="btn btn-secondary" id="button" style="width: 100px;">検索</button>
+			</div>
+			<!-- 商品一覧リストの件数 -->
+			<label id="result" th:text="'合計:'+${productListCount}+'件'"></label><br />
+		</div>
+		<!-- テーブル一覧 -->
+		<table id="table" class="table table-hover">
+			<tr>
+				<th style='display: none;' class="info colsm-2">ID</th>
+				<th class="info colsm-2">分類名</th>
+				<th class="info colsm-2">商品名</th>
+				<th class="info colsm-2">会社名</th>
+				<th class="info colsm-2">数量</th>
+				<th class="info colsm-2" colspan="3">操作</th>
+			</tr>
+
+			<tr th:each="many,stat:${ma}">
+				<td search='no' style='display: none' th:text="${many.id}"></td>
+				<td search='yes' th:text="${many.category_name}"></td>
+				<td search='yes' th:text="${many.product_name}"></td>
+				<td search='yes' th:text="${many.company_name}"></td>
+				<td search='yes' th:text="${many.count}"></td>
+				<td search='no'><a class="btn btn-success"
+					th:href="@{'/productEntry/'+${many.id}}">入庫</a>
+				<td search='no'><a class="btn btn-primary"
+					th:href="@{'/productExit/'+${many.id}}">出庫</a></td>
+				<td search='no'><div sec:authorize="hasRole('K')">
+						<a class="btn btn-danger"
+							th:href="@{'/deleteProduct/'+${many.id}}">削除</a>
+					</div></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

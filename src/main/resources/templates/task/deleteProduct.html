@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Delete Product</title>
+</head>
+<body>
+	<div th:fragment="deleteProduct_contents">
+		<div style="display: flex; justify-content: center">
+			<div class="col-sm-5 ">
+				<div class="page-header text-center">
+
+					<h1>削除確認画面</h1>
+				</div>
+				*この商品を削除しますか？
+				<form method="post" th:action="@{/deleteProduct}"
+					th:object="${deleteProductForm}">
+					<table class="table table-bordered table-hover">
+						<!-- 商品名の入力エリア(固定) -->
+						<tr>
+							<th>商品名</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control"
+										th:field="*{productName}" readonly> <input
+										type="hidden" th:field="*{id}">
+								</div></td>
+						</tr>
+						<!-- カテゴリー名の入力エリア(固定) -->
+						<tr>
+							<th>分類名</th>
+							<td><input type="text" class="form-control"
+								th:field="*{categoryName}" readonly></td>
+						</tr>
+						<!-- 会社名の入力エリア(固定) -->
+						<tr>
+							<th>会社名</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control"
+										th:field="*{companyName}" readonly>
+								</div></td>
+						</tr>
+						<!-- 数量の入力エリア(固定) -->
+						<tr>
+							<th>数量</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control" th:field="*{count}"
+										readonly>
+								</div></td>
+						</tr>
+					</table>
+					<!-- 商品の削除ボタン -->
+					<div class="d-md-flex justify-content-between">
+						<button class="btn btn-danger" type="submit">削除する</button>
+
+						<button class="btn btn-secondary" type="button"
+							onclick="history.back()">戻る</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}"
+	rel="stylesheet"></link>
+<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+<!-- cssの読込 -->
+<link th:href="@{/css/style.css}" rel="stylesheet"></link>
+<title>Task Layout</title>
+</head>
+<body>
+	<header class="navbar navbar-dark  bg-dark flex-justify p-3 shadow">
+		<div class="container-fluid justify-content-start">
+			<a class="navbar-brand" href="#">商品管理アプリ</a> <a
+				class="nav-link active" th:href="@{'/productList'}">商品一覧画面</a> <a
+				class="nav-link active" th:href="@{'/loadingAndUnloading'}">入出庫履歴画面</a>
+			<div class="navbar-header-right position-absolute end-0">
+				<form method="post" th:action="@{/logout}">
+					<button class="btn btn-link  navbar-brand" type="submit">ログアウト</button>
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- サイドバー -->
+	<div class="container-fruid">
+		<div class="row ">
+			<nav id="sidebar"
+				class=" col-sm-2 col-sm-push9 d-md-block bg-dark sidebar collapse sidebar">
+				<div class="position-sticky pt-3">
+					<ul class="nav flex-column ">
+						<li class="nav-item"><a th:href="@{'/passwordUpdate'}"
+							class="nav-link  aria-current=page  text-white"> パスワード更新 </a></li>
+						<li role="presentation" sec:authorize="hasAnyRole('K','S')"><a
+							th:href="@{'/userList'}" class="nav-link text-white">
+								ユーザー詳細一覧 </a></li>
+						<li role="presentation" sec:authorize="hasAnyRole('K','S')"><a
+							th:href="@{'/signUp'}" class="nav-link text-white"> ユーザー新規登録
+						</a></li>
+						<li role="presentation" sec:authorize="hasRole('K')"><a
+							th:href="@{'/insertProduct'}" class="nav-link text-white">商品新規登録</a></li>
+					</ul>
+				</div>
+			</nav>
+			<!-- コンテンツ -->
+			<div class="col-sm-9 col-sm-pull2" style="padding-top: 40px;">
+				<div th:include="__${contents}__"></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script th:src="@{./js/javas.js}"></script>
+</html>

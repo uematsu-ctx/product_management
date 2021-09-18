@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:fragment="deleteUserCheck_contents">
+		<div style="display: flex; justify-content: center">
+			<div class="col-sm-5 ">
+				<div class="page-header">
+					<h1 class="text-center">ユーザー削除確認</h1>
+					<p>*このユーザーを削除しますか？</p>
+				</div>
+				<form method="post" th:action="@{/deleteUserCheck}"
+					th:object="${signUpForm}">
+					<table class="table table-bordered tabale-hover">
+						<!-- ユーザーIDの入力エリア -->
+						<tr>
+							<th class="active col-sm-3">ユーザーID</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control" th:field="*{userId}"
+										readonly>
+								</div></td>
+						</tr>
+						<!-- ユーザー名の入力エリア -->
+						<tr>
+							<th class="active col-sm-3">ユーザー名</th>
+							<td><div class="form-group">
+									<input type="text" class="form-control" th:field="*{userName}"
+										readonly>
+								</div></td>
+						</tr>
+						<!-- パスワードの入力エリア -->
+						<tr>
+							<th class="active col-sm-3">パスワード</th>
+							<td><div class=form-group>
+									<input type="text" class="form-control" th:field="*{password}"
+										readonly>
+								</div></td>
+						</tr>
+						<!-- 誕生日の入力エリア -->
+						<tr>
+							<th class="active col-sm-3">誕生日</th>
+							<td><div class=form-group>
+									<input type="text" class="form-control" th:field="*{birthday}"
+										readonly>
+								</div></td>
+						</tr>
+						<tr>
+							<!-- 雇用形態の入力エリア -->
+							<th class="active col-sm-3">雇用形態</th>
+							<td>
+								<div class="form-group">
+									<div th:each="item:${radioRole}">
+										<input type="radio" class="workType" name="radioRole" th:value="${item.value}"
+											th:text="${item.key}" th:field="*{role}" ></input>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<!-- ユーザー削除ボタン -->
+					<div class="d-md-flex justify-content-between">
+						<button class="btn btn-danger" type="submit" >削除</button>
+						<button class="btn btn-secondary" onclick="history.back()"
+							type="button">戻る</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

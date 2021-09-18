@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Loading And Unloading</title>
+</head>
+<body>
+	<div th:fragment="loadingAndUnloading_contents">
+		<div class="col-sm-12">
+			<div class="page-header">
+				<h1>入出庫履歴</h1>
+			</div>
+			<form method="get" th:action="@{/lauSearch}">
+				<table class="table" style="border: hidden;">
+					<tr>
+						<td class="text-right">
+							<div class="navbar-form">
+								<div class="form-group">
+									<input type="date" name="number" required pattern="\d{4}-\d{2}-\d{2}">
+									<button class="btn btn-secondary" type="submit">検索</button>
+								</div>
+
+							</div>
+						</td>
+					</tr>
+				</table>
+				<table class="table table-hover">
+					<tr>
+						<th style='display: none;' class="info colsm-2">ID</th>
+						<th class="info colsm-2">日付時間</th>
+						<th class="info colsm-2">分類名</th>
+						<th class="info colsm-2">商品名</th>
+						<th class="info colsm-2">会社名</th>
+						<th class="info colsm-2">数量</th>
+						<th class="info colsm-2">入庫(+)/出庫(-)</th>
+						<th class="info colsm-2">担当者</th>
+					</tr>
+
+					<tr th:each="many,stat:${ma1}">
+						<td style='display: none' th:text="${many.id}"></td>
+						<td
+							th:text="${#temporals.format(many.date_time,'yyyy/MM/dd HH:mm:ss')}"></td>
+						<td th:text="${many.category_name}"></td>
+						<td th:text="${many.product_name}"></td>
+						<td th:text="${many.company_name}"></td>
+						<td th:text="${many.count_before}"></td>
+						<td th:text="${many.count_l}"></td>
+						<td th:text="${many.user_name}"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

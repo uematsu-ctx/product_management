@@ -1,3 +1,6 @@
+# 商品管理アプリケーション
+
+フレームワークはspringで構成しております。
 
 
 ![商品一覧](https://user-images.githubusercontent.com/75824193/135371269-5dc65d07-4525-4e4a-b5e1-e22d8aaa2d25.png)
